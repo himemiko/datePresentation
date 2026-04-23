@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>わたしたちのデート計画 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --blush: #E8C5B5;
+    --rose: #C9887A;
+    --deep: #3D2B2B;
+    --sage: #8A9E8C;
+    --gold: #C9A96E;
+    --warm-white: #FDF9F5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--deep);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+    position: relative;
+    background: linear-gradient(160deg, #FAF7F2 0%, #F2E8E0 50%, #EDE0D8 100%);
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,136,122,0.15) 0%, transparent 70%);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(138,158,140,0.12) 0%, transparent 70%);
+  }
+
+  .cover-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--rose);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+  .cover h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 9vw, 52px);
+    line-height: 1.2;
+    color: var(--deep);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s ease forwards;
+  }
+  .cover h1 em {
+    font-style: italic;
+    color: var(--rose);
+  }
+  .cover-sub {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: #9A7A72;
+    margin: 16px 0 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s ease forwards;
+  }
+  .cover-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--rose);
+    margin: 0 auto 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s ease forwards;
+  }
+  .cover-intro {
+    max-width: 340px;
+    font-size: 13.5px;
+    line-height: 2;
+    color: #7A6060;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s ease forwards;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 56px 24px 40px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+  .section-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: rgba(201,136,122,0.15);
+    line-height: 1;
+    margin-bottom: -20px;
+  }
+  .section-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--rose);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.3;
+    color: var(--deep);
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+  .section-desc {
+    font-size: 13px;
+    line-height: 2;
+    color: #7A6060;
+    margin-top: 12px;
+    padding-left: 16px;
+    border-left: 2px solid rgba(201,136,122,0.3);
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--warm-white);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(201,136,122,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rose), var(--blush));
+    border-radius: 16px 16px 0 0;
+  }
+  .card-emoji {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .card-name {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 4px;
+  }
+  .card-detail {
+    font-size: 12px;
+    color: #9A7A72;
+    line-height: 1.8;
+  }
+  .card-badge {
+    display: inline-block;
+    background: rgba(201,136,122,0.12);
+    color: var(--rose);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+
+  .card-highlight {
+    background: linear-gradient(135deg, #FDF5F0, #FAF0EC);
+    border: 1px solid rgba(201,136,122,0.25);
+  }
+
+  /* ── TIMELINE CARD ── */
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+    margin-top: 20px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--rose), transparent);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -21px; top: 6px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--rose);
+  }
+  .tl-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--rose);
+    margin-bottom: 2px;
+  }
+  .tl-text {
+    font-size: 13px;
+    color: var(--deep);
+    line-height: 1.6;
+  }
+  .tl-sub {
+    font-size: 11.5px;
+    color: #9A7A72;
+    margin-top: 2px;
+    line-height: 1.6;
+  }
+
+  /* ── SPOT GRID ── */
+  .spot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .spot-card {
+    background: var(--warm-white);
+    border-radius: 14px;
+    padding: 18px 14px;
+    border: 1px solid rgba(201,136,122,0.12);
+    text-align: center;
+  }
+  .spot-card-em {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  .spot-card-name {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--deep);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .spot-card-sub {
+    font-size: 10.5px;
+    color: #9A7A72;
+    line-height: 1.5;
+  }
+
+  /* ── DRINK CARD ── */
+  .drink-list {
+    margin-top: 16px;
+  }
+  .drink-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(201,136,122,0.1);
+  }
+  .drink-item:last-child { border-bottom: none; }
+  .drink-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--rose);
+    min-width: 24px;
+    padding-top: 1px;
+  }
+  .drink-info {}
+  .drink-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 3px;
+  }
+  .drink-detail {
+    font-size: 11.5px;
+    color: #9A7A72;
+    line-height: 1.7;
+  }
+
+  /* ── SCHEDULE ── */
+  .schedule-grid {
+    display: grid;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .sch-item {
+    background: var(--warm-white);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    border: 1px solid rgba(201,136,122,0.12);
+  }
+  .sch-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--rose);
+    min-width: 60px;
+    padding-top: 1px;
+    line-height: 1.4;
+  }
+  .sch-content {
+    font-size: 12.5px;
+    color: var(--deep);
+    line-height: 1.7;
+  }
+  .sch-places {
+    font-size: 11px;
+    color: var(--sage);
+    margin-top: 3px;
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 24px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,136,122,0.2);
+  }
+  .section-divider span {
+    font-size: 18px;
+  }
+
+  /* ── NOTE BOX ── */
+  .note-box {
+    background: linear-gradient(135deg, rgba(201,136,122,0.08), rgba(138,158,140,0.08));
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.9;
+    color: #6A5050;
+  }
+
+  /* ── ENDING ── */
+  .ending {
+    text-align: center;
+    padding: 60px 24px;
+    background: linear-gradient(160deg, var(--cream), #EDE0D8);
+  }
+  .ending-heart {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+  .ending-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--rose);
+    margin-bottom: 12px;
+  }
+  .ending-sub {
+    font-size: 12px;
+    color: #9A7A72;
+    line-height: 2;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MAP LINK ── */
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--sage);
+    text-decoration: none;
+    border: 1px solid rgba(138,158,140,0.35);
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(138,158,140,0.07);
+    transition: background 0.2s;
+  }
+  .map-link:hover { background: rgba(138,158,140,0.18); }
+
+  /* ── YT LINK ── */
+  .yt-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 12px;
+    font-size: 11px;
+    color: #b05050;
+    text-decoration: none;
+    border: 1px solid rgba(176,80,80,0.3);
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(176,80,80,0.06);
+    transition: background 0.2s;
+  }
+  .yt-link:hover { background: rgba(176,80,80,0.14); }
+
+  /* ── PILL TAGS ── */
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pill {
+    background: rgba(201,136,122,0.1);
+    color: var(--rose);
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(201,136,122,0.2);
+  }
+  .pill.sage {
+    background: rgba(138,158,140,0.1);
+    color: var(--sage);
+    border-color: rgba(138,158,140,0.2);
+  }
+  .pill.gold {
+    background: rgba(201,169,110,0.1);
+    color: var(--gold);
+    border-color: rgba(201,169,110,0.2);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ COVER ═══════════════════════════════ -->
+<div class="cover">
+  <div class="cover-tag">April – May 2025</div>
+  <h1>わたしたちの<br><em>デート計画</em></h1>
+  <div class="cover-sub">PRESENTED BY HIME</div>
+  <div class="cover-divider"></div>
+  <p class="cover-intro">
+    行きたい場所、食べたいもの、<br>
+    やってみたいこと、ぜんぶここに詰め込んだよ。<br><br>
+    よしきくんと一緒に叶えていきたいな 🌿
+  </p>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- ═══════════════════════════════ ① 土曜日課デート ═══════════════════════════════ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <span class="section-tag">Every Saturday Ritual</span>
+    <h2 class="section-title">土曜日課<em>デート</em></h2>
+    <p class="section-desc">
+      特別な場所に行かなくても、<br>
+      ふたりの「いつも」を一緒に過ごせたら<br>
+      それが一番好きな日になりそうで。
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">MORNING</div>
+        <div class="tl-text">🏋️ それぞれのジムで朝活</div>
+        <div class="tl-sub">ふたりとも別のジムだけど、同じ時間に頑張ってるのなんかいいよね</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">10:00 〜</div>
+        <div class="tl-text">☕ なかめ・代官山でモーニングカフェ開拓</div>
+        <div class="tl-sub">朝活のあと、ふたりで新しいカフェ行きたい！</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">AFTERNOON</div>
+        <div class="tl-text">💻 よしきくんお仕事（SHARE LOUNGE 代官山）</div>
+        <div class="tl-sub">ひめも一緒にシェアランで作業 or 近くのカフェで作業したい！</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">EVENING</div>
+        <div class="tl-text">🛒 帰り道でふたりで買い出し</div>
+        <div class="tl-sub">平日の作り置き食材も一緒に選びたい</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">NIGHT</div>
+        <div class="tl-text">🍳 一緒に料理 → ご飯食べながらアニメ</div>
+        <div class="tl-sub">作り置きして、夜ご飯作って、アニメまで全部一緒にしたい</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-highlight">
+    <span class="card-emoji">☕</span>
+    <div class="card-name">モーニングカフェ候補（なかめ・代官山）</div>
+    <div class="card-detail">10時までにオープンしてるお店を選んだよ！</div>
+
+    <div class="drink-list">
+      <div class="drink-item">
+        <div class="drink-num">1</div>
+        <div class="drink-info">
+          <div class="drink-name">DUCT COFFEE LAB 代官山店</div>
+          <div class="drink-detail">代官山駅・中目黒駅から徒歩3〜6分｜10:00〜19:30<br>Wi-Fiあり・スコーンあり！こだわりコーヒーが飲めるおしゃれ空間</div>
+          <a class="map-link" href="https://www.google.com/maps/place/DUCT+COFFEE+LAB/data=!4m2!3m1!1s0x60188be1793242e3:0x7f7269eedd3106ae" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-num">2</div>
+        <div class="drink-info">
+          <div class="drink-name">& OIMO TOKYO CAFE 中目黒店</div>
+          <div class="drink-detail">中目黒駅すぐ｜さつまいもスイーツ専門カフェ<br>芋タルトやモンブランが絶品・映え度も◎</div>
+          <a class="map-link" href="https://www.google.com/maps/place/%26+OIMO+TOKYO+CAFE+%E4%B8%AD%E7%9B%AE%E9%BB%92%E5%BA%97/data=!4m2!3m1!1s0x60188bf326b4ed29:0x53667f8fcd4569a1" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-num">3</div>
+        <div class="drink-info">
+          <div class="drink-name">アンティコカフェ アルアビス アトレ恵比寿店</div>
+          <div class="drink-detail">アトレ恵比寿内｜モーニングから営業<br>イタリアンカフェの老舗！本格カプチーノとパニーニが人気<br>アクセス抜群で朝からゆっくりできる◎</div>
+          <a class="map-link" href="https://www.google.com/maps/place/%E3%82%A2%E3%83%B3%E3%83%86%E3%82%A3%E3%82%B3%E3%82%AB%E3%83%95%E3%82%A7+%E3%82%A2%E3%83%AB%E3%82%A2%E3%83%93%E3%82%B9+%E3%82%A2%E3%83%88%E3%83%AC%E6%81%B5%E6%AF%94%E5%AF%BF%E5%BA%97/data=!4m2!3m1!1s0x60188b403f64d549:0x1deae5fa601c80fa" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-num">4</div>
+        <div class="drink-info">
+          <div class="drink-name">THE CITY BAKERY 代官山</div>
+          <div class="drink-detail">代官山駅徒歩3分｜7:30〜19:00<br>NYスタイルのパン屋さん！早起きできたら絶対行きたい</div>
+          <a class="map-link" href="https://www.google.com/maps/search/THE+CITY+BAKERY+代官山" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- ═══════════════════════════════ ② 整いデート ═══════════════════════════════ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <span class="section-tag">Sweat & Reset</span>
+    <h2 class="section-title">整い<em>デート</em></h2>
+    <p class="section-desc">
+      一緒に汗かいて、自然で整って、<br>
+      すっきりしたあとはお酒で乾杯 🍺<br>
+      最高の一日になりそう！
+    </p>
+  </div>
+
+  <div class="card">
+    <span class="card-emoji">🏃‍♀️</span>
+    <div class="card-name">一緒に汗かきたい！スポット候補</div>
+    <div class="card-detail">スポット参加OKのものを選んだよ</div>
+
+    <div class="drink-list">
+      <div class="drink-item">
+        <div class="drink-num">1</div>
+        <div class="drink-info">
+          <div class="drink-name">サウナ・銭湯デート 🛁</div>
+          <div class="drink-detail">よしきくんサウナ好きだもんね！<br>よしきくんのおすすめのサウナや銭湯、教えてほしいな〜🙏<br>一緒に開拓するのも楽しそうだし、よしきくんのお気に入りに連れてってほしい！</div>
+        </div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-num">2</div>
+        <div class="drink-info">
+          <div class="drink-name">ボルダリング 🧗‍♀️</div>
+          <div class="drink-detail">運動不足解消＆ゲーム感覚で楽しめる！<br>B-PUMP渋谷・T-WALL渋谷など都内各所で体験可<br>ふたりで「次のルート攻略するぞ！」ってなりそう笑</div>
+        </div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-num">3</div>
+        <div class="drink-info">
+          <div class="drink-name">サイクリング 🚴‍♀️</div>
+          <div class="drink-detail">レンタサイクルでのんびり走るのいいかも！<br>荒川サイクリングロードや多摩川沿いは景色も気持ちいい🌿<br>途中でカフェや公園に寄り道しながらで、一日楽しめる◎</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="card-emoji">🌿</span>
+    <div class="card-name">自然で整う散歩・ピクニックスポット</div>
+    <div class="card-detail">これから暑くなるし、涼しい緑の中でのんびりしたい</div>
+
+    <div class="drink-list">
+      <div class="drink-item">
+        <div class="drink-num">1</div>
+        <div class="drink-info">
+          <div class="drink-name">等々力渓谷</div>
+          <div class="drink-detail">東京23区唯一の渓谷！都内とは思えない自然🌊<br>等々力駅から徒歩2分｜2026年3月に通行止め解除されたばかり！<br>近くのhaluuuでフルーツサンドをテイクアウトしてピクニックするのが夢 🧺</div>
+          <div class="pills"><span class="pill sage">涼しい</span><span class="pill sage">ピクニック◎</span><span class="pill">渋谷から20分</span></div>
+          <a class="map-link" href="https://www.google.com/maps/search/等々力渓谷" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-num">2</div>
+        <div class="drink-info">
+          <div class="drink-name">林試の森公園（中目黒・武蔵小山）</div>
+          <div class="drink-detail">なかめから近い本格的な森の公園🌲<br>うっそうとした木々で夏でも涼しい！レジャーシート持参でピクニックしたい</div>
+          <div class="pills"><span class="pill sage">なかめから近い</span><span class="pill sage">木陰が涼しい</span></div>
+          <a class="map-link" href="https://www.google.com/maps/search/林試の森公園" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-num">3</div>
+        <div class="drink-info">
+          <div class="drink-name">新宿御苑</div>
+          <div class="drink-detail">広大な緑地でゆったりピクニック🌸<br>早めの時間ならそんなに混まない穴場スポットも多い</div>
+          <div class="pills"><span class="pill sage">広い</span><span class="pill">ピクニック定番</span></div>
+          <a class="map-link" href="https://www.google.com/maps/search/新宿御苑" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-highlight">
+    <span class="card-emoji">🍺</span>
+    <div class="card-name">汗かいたあとの乾杯！はしご酒候補</div>
+    <div class="card-detail">エリア別でまとめたよ！気分で選んでね🗺️</div>
+
+    <div style="margin-top:16px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;letter-spacing:0.2em;color:var(--rose);margin-bottom:10px;">— 中目黒エリア —</div>
+      <div class="drink-list">
+        <div class="drink-item">
+          <div class="drink-num">1</div>
+          <div class="drink-info">
+            <div class="drink-name">小籠包マニア 中目黒本店</div>
+            <div class="drink-detail">中目黒駅徒歩2分｜17:00〜23:00<br>本場中国から来た職人さんの本格小籠包！よだれ鶏や黒酢豚も絶品<br>予算3,000〜4,000円</div>
+            <div class="pills"><span class="pill">中華</span><span class="pill gold">なかめ</span></div>
+            <a class="map-link" href="https://www.google.com/maps/place/%E5%B0%8F%E7%B1%A0%E5%8C%85%E3%83%9E%E3%83%8B%E3%82%A2+%E4%B8%AD%E7%9B%AE%E9%BB%92%E6%9C%AC%E5%BA%97/data=!4m2!3m1!1s0x60188b81cd5f010d:0x1119a7f1f6baa649" target="_blank">📍 Google マップ</a>
+          </div>
+        </div>
+        <div class="drink-item">
+          <div class="drink-num">2</div>
+          <div class="drink-info">
+            <div class="drink-name">関西煮 理</div>
+            <div class="drink-detail">上目黒2-16-1 リードシー中目黒 3F｜18:00〜24:00<br>東京で1番美味しいと噂のおでん屋さん！50種類のおでん＆絶品チーズリゾット<br>予約が取れなくなる前に絶対行きたい！</div>
+            <div class="pills"><span class="pill">関西おでん</span><span class="pill gold">なかめ</span></div>
+            <a class="map-link" href="https://www.google.com/maps/search/関西煮+理+中目黒" target="_blank">📍 Google マップ</a>
+          </div>
+        </div>
+        <div class="drink-item">
+          <div class="drink-num">3</div>
+          <div class="drink-info">
+            <div class="drink-name">目黒 三谷</div>
+            <div class="drink-detail">学芸大学駅徒歩1分｜18:00〜24:00（土日16:00〜）<br>肉料理がどれも絶品…！炭火焼きと肉料理特化のお店🥩<br>予算4,000円〜</div>
+            <div class="pills"><span class="pill">焼き鳥・肉</span><span class="pill gold">なかめ</span></div>
+            <a class="map-link" href="https://www.google.com/maps/search/目黒+三谷+学芸大学" target="_blank">📍 Google マップ</a>
+          </div>
+        </div>
+        <div class="drink-item">
+          <div class="drink-num">4</div>
+          <div class="drink-info">
+            <div class="drink-name">風見堂 中目黒</div>
+            <div class="drink-detail">中目黒エリア｜Googleマップに保存してたお店<br>カップ酒の日本酒がおすすめらしい！🍶<br>はしご酒のシメにぴったりな予感</div>
+            <div class="pills"><span class="pill">日本酒</span><span class="pill gold">なかめ</span></div>
+            <a class="map-link" href="https://www.google.com/maps/place/%E9%A2%A8%E8%A6%8B%E5%A0%82+%E4%B8%AD%E7%9B%AE%E9%BB%92/data=!4m2!3m1!1s0x60188bd98cda5819:0x997edd8d7288bdb0" target="_blank">📍 Google マップ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;letter-spacing:0.2em;color:var(--rose);margin-bottom:10px;">— 渋谷エリア —</div>
+      <div class="drink-list">
+        <div class="drink-item">
+          <div class="drink-num">1</div>
+          <div class="drink-info">
+            <div class="drink-name">ariki（代々木上原）</div>
+            <div class="drink-detail">代々木上原駅徒歩1分｜17:00〜23:00<br>隠れ家ビストロ！パスタとワインが絶品<br>私ビストロ好きかもって気づいたお店笑　予算5,000円〜</div>
+            <div class="pills"><span class="pill">ビストロ</span><span class="pill">ワイン</span><span class="pill gold">渋谷系</span></div>
+            <a class="map-link" href="https://www.google.com/maps/search/ariki+代々木上原" target="_blank">📍 Google マップ</a>
+          </div>
+        </div>
+        <div class="drink-item">
+          <div class="drink-num">2</div>
+          <div class="drink-info">
+            <div class="drink-name">Henderson（渋谷）</div>
+            <div class="drink-detail">渋谷駅徒歩10分｜18:00〜23:30（土曜16:00〜）<br>まるでフランス…な雰囲気のフレンチビストロ！<br>予算6,000円〜｜日曜定休</div>
+            <div class="pills"><span class="pill">フレンチ</span><span class="pill">ワイン</span><span class="pill gold">渋谷</span></div>
+            <a class="map-link" href="https://www.google.com/maps/search/Henderson+渋谷+宇田川町" target="_blank">📍 Google マップ</a>
+          </div>
+        </div>
+        <div class="drink-item">
+          <div class="drink-num">3</div>
+          <div class="drink-info">
+            <div class="drink-name">您好（幡ヶ谷）</div>
+            <div class="drink-detail">幡ヶ谷駅徒歩5分｜17:00〜22:00<br>3種類の手作り餃子が名物！特に水餃子が大優勝とのこと🥟<br>定休：月・日曜</div>
+            <div class="pills"><span class="pill">餃子</span><span class="pill gold">渋谷系</span></div>
+            <a class="map-link" href="https://www.google.com/maps/search/您好+幡ヶ谷+餃子" target="_blank">📍 Google マップ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;letter-spacing:0.2em;color:var(--rose);margin-bottom:10px;">— 新宿エリア —</div>
+      <div class="drink-list">
+        <div class="drink-item">
+          <div class="drink-num">1</div>
+          <div class="drink-info">
+            <div class="drink-name">道しるべ（新宿・歌舞伎町）</div>
+            <div class="drink-detail">西武新宿駅徒歩3分｜18:00〜01:00（月〜土）<br>路地裏に佇む食べログ百名店！炭火焼き鳥が一本ずつ丁寧<br>入りづらそうだけどそこが良さそう笑　予算4,000〜4,999円</div>
+            <div class="pills"><span class="pill">焼き鳥</span><span class="pill sage">百名店</span><span class="pill gold">新宿</span></div>
+            <a class="map-link" href="https://www.google.com/maps/search/道しるべ+新宿+歌舞伎町+焼き鳥" target="_blank">📍 Google マップ</a>
+          </div>
+        </div>
+        <div class="drink-item">
+          <div class="drink-num">2</div>
+          <div class="drink-info">
+            <div class="drink-name">ビストロ リタ 新宿店</div>
+            <div class="drink-detail">新宿駅徒歩5分<br>若者＆女性に人気のビストロ！ライブ感ある開放的な空間<br>デートにも女子会にも◎なおしゃれ居酒屋</div>
+            <div class="pills"><span class="pill">ビストロ</span><span class="pill gold">新宿</span></div>
+            <a class="map-link" href="https://www.google.com/maps/place/%E3%83%93%E3%82%B9%E3%83%88%E3%83%AD+%E3%83%AA%E3%82%BF+%E6%96%B0%E5%AE%BF%E5%BA%97/data=!4m2!3m1!1s0x60188dc58c550157:0x6bb63aed755439c1" target="_blank">📍 Google マップ</a>
+          </div>
+        </div>
+        <div class="drink-item">
+          <div class="drink-num">3</div>
+          <div class="drink-info">
+            <div class="drink-name">大衆酒場また会いにゆきます 西新宿店</div>
+            <div class="drink-detail">新宿駅徒歩6分｜11:30〜23:00<br>オープンしたばかりで満席の超人気ネオ居酒屋！<br>予算4,000〜6,000円</div>
+            <div class="pills"><span class="pill">ネオ居酒屋</span><span class="pill gold">新宿</span></div>
+            <a class="map-link" href="https://www.google.com/maps/place/%E5%A4%A7%E8%A1%86%E9%85%92%E5%A0%B4%E3%81%BE%E3%81%9F%E4%BC%9A%E3%81%84%E3%81%AB%E3%82%86%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82%E8%A5%BF%E6%96%B0%E5%AE%BF%E5%BA%97/data=!4m2!3m1!1s0x60188d005eba11d3:0xbecacd2e263e13c5" target="_blank">📍 Google マップ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- ═══════════════════════════════ ③ 食べ歩きデート ═══════════════════════════════ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <span class="section-tag">Walk & Eat</span>
+    <h2 class="section-title">食べ歩き<em>デート</em></h2>
+    <p class="section-desc">
+      散歩しながら美味しいものをつまみ食い。<br>
+      よしきくんに「それいいね！」って言ってもらえるような<br>
+      素敵なコースにしたい 🗺️
+    </p>
+  </div>
+
+  <div class="card card-highlight">
+    <span class="card-emoji">🥢</span>
+    <div class="card-name">① 砂町銀座商店街（東京・江東区）</div>
+    <div class="card-detail">昭和の下町情緒が残る、東京最長級の商店街！<br>定番すぎる浅草を避けつつ、本物の「食べ歩き」が楽しめる穴場 🏮<br><br>
+    🍢 コロッケ、串焼き、和菓子、豆大福etc.<br>
+    🌳 近くに仙台堀川公園あり → ピクニックも◎<br>
+    🚃 東陽町・南砂町駅から歩いてすぐ</div>
+    <div class="pills"><span class="pill">昭和レトロ</span><span class="pill sage">穴場</span><span class="pill">ピクニック◎</span></div>
+    <a class="yt-link" href="https://www.youtube.com/results?search_query=砂町銀座商店街+食べ歩き+デート" target="_blank">▶ YouTube で動画を見る</a>
+  </div>
+
+  <div class="card">
+    <span class="card-emoji">🕯️</span>
+    <div class="card-name">② 蔵前・浅草橋エリア</div>
+    <div class="card-detail">おしゃれなクラフト系ショップとカフェが集まる、東京の隠れたホットスポット！<br>古い倉庫をリノベした空間が多くて、歩いてるだけで楽しい 🪄<br><br>
+    ☕ 個性的なカフェ・チョコレート専門店めぐり<br>
+    🧁 テイクアウトスイーツをつまみ食い<br>
+    🕍 隅田川沿いの遊歩道でのんびり散歩<br>
+    🛍️ ハンドメイド雑貨や革製品のお店も楽しい<br>
+    🚃 蔵前駅・浅草橋駅からすぐ<br><br>
+    ✨ dial（インスタで気になってたあのカフェ！）も蔵前にあるよ🎲</div>
+    <div class="pills"><span class="pill">おしゃれ</span><span class="pill sage">穴場感◎</span><span class="pill">隅田川散歩</span></div>
+    <a class="yt-link" href="https://www.youtube.com/results?search_query=蔵前+浅草橋+食べ歩き+デート+カフェ" target="_blank">▶ YouTube で動画を見る</a>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- ═══════════════════════════════ ④ 温泉デート ═══════════════════════════════ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <span class="section-tag">Onsen Getaway</span>
+    <h2 class="section-title">温泉<em>デート</em></h2>
+    <p class="section-desc">
+      夏の海外旅行の予行練習に、<br>
+      近場で1泊してみない？<br>
+      よしきくんが前から言ってた温泉、行こう 🛁
+    </p>
+  </div>
+
+  <div class="card card-highlight">
+    <span class="card-emoji">🌋</span>
+    <div class="card-name">① 箱根（神奈川） ⭐️ 一番おすすめ！</div>
+    <div class="card-detail">電車（ロマンスカー）でアクセス良好 🚃<br>温泉街歩き、美術館、絶景露天風呂…全部揃ってる！</div>
+    <div class="drink-list">
+      <div class="drink-item">
+        <div class="drink-num">🛁</div>
+        <div class="drink-info">
+          <div class="drink-name">おすすめの過ごし方</div>
+          <div class="drink-detail">
+            ① 新宿からロマンスカーで箱根湯本へ（約85分）<br>
+            ② 湯本〜強羅エリアで温泉宿にチェックイン<br>
+            ③ 箱根旧街道を散策＆甘酒茶屋で一休み☕<br>
+            ④ 芦ノ湖の遊覧船＋大涌谷の黒たまご<br>
+            ⑤ 箱根美術館 or ポーラ美術館でアート鑑賞🎨<br>
+            ⑥ 旅館の夕食＋貸切風呂でのんびり<br>
+            ⑦ 翌朝：湯本の商店街でかまぼこ・温泉まんじゅう食べ歩き 🥟
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pills"><span class="pill">電車でOK</span><span class="pill">食べ歩き◎</span><span class="pill gold">おすすめ度No.1</span></div>
+    <a class="yt-link" href="https://www.youtube.com/results?search_query=箱根+温泉+カップル+旅行+観光+モデルコース" target="_blank">▶ YouTube で動画を見る</a>
+  </div>
+
+  <div class="card">
+    <span class="card-emoji">🌊</span>
+    <div class="card-name">② 熱海（静岡）</div>
+    <div class="card-detail">東京から新幹線で約45分！アクセス最強の温泉地 🚅<br>最近リノベカフェや新スポットが増えてオシャレになってる</div>
+    <div class="drink-list">
+      <div class="drink-item">
+        <div class="drink-num">🛁</div>
+        <div class="drink-info">
+          <div class="drink-name">おすすめの過ごし方</div>
+          <div class="drink-detail">
+            ① 熱海駅から温泉宿へ（駅近の宿も多い！）<br>
+            ② 熱海銀座・平和通り商店街で食べ歩き🍢<br>
+            ③ 熱海MOA美術館（絶景スポット！）🏛️<br>
+            ④ 起雲閣でのんびり散策<br>
+            ⑤ 翌朝：地魚の海鮮丼で朝ごはん🐟
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pills"><span class="pill">新幹線45分</span><span class="pill">食べ歩き◎</span><span class="pill">コスパ良し</span></div>
+    <a class="yt-link" href="https://www.youtube.com/results?search_query=熱海+温泉+カップル+旅行+モデルコース" target="_blank">▶ YouTube で動画を見る</a>
+  </div>
+
+  <div class="card">
+    <span class="card-emoji">🌊</span>
+    <div class="card-name">③ 伊豆（静岡）</div>
+    <div class="card-detail">海と山、両方楽しめる欲張りな温泉地！<br>熱海より少し足を伸ばすだけで、より本格的な温泉旅気分に 🌿</div>
+    <div class="drink-list">
+      <div class="drink-item">
+        <div class="drink-num">🛁</div>
+        <div class="drink-info">
+          <div class="drink-name">おすすめの過ごし方</div>
+          <div class="drink-detail">
+            ① 東京駅から踊り子号で下田・修善寺へ（約2〜2.5時間）<br>
+            ② 修善寺温泉：竹林の小径の散歩がフォトジェニック🎋<br>
+            ③ 下田エリア：ペリーロードのレトロな街並みで食べ歩き🍦<br>
+            ④ 海の幸！金目鯛の煮付けは外せない🐟<br>
+            ⑤ 翌朝：伊豆の朝市や海沿い散歩でのんびり
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pills"><span class="pill">電車でOK</span><span class="pill">海＆山</span><span class="pill sage">フォトジェニック</span></div>
+    <a class="yt-link" href="https://www.youtube.com/results?search_query=伊豆+修善寺+下田+カップル+旅行+温泉" target="_blank">▶ YouTube で動画を見る</a>
+  </div>
+
+  <div class="note-box">
+    💡 銀山温泉（山形）も憧れてるんだけど、冬は予約が全然取れなくて…<br>
+    もし行けるタイミングが来たら、ぜひ一緒に行きたい！
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- ═══════════════════════════════ ⑤ スケジュール別プラスα ═══════════════════════════════ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-number">05</div>
+    <span class="section-tag">Plus α Suggestions</span>
+    <h2 class="section-title">予定エリアの<em>プラスα</em></h2>
+    <p class="section-desc">
+      もうすでに決まってるデートに、<br>
+      ちょっと追加できそうなお店を提案！
+    </p>
+  </div>
+
+  <div class="card card-highlight">
+    <span class="card-emoji">🗓️</span>
+    <div class="card-name">4/26（土）表参道・銀座デート</div>
+    <div class="drink-list">
+      <div class="drink-item">
+        <div class="drink-num">☕</div>
+        <div class="drink-info">
+          <div class="drink-name">IL PACIOCCONE（表参道）</div>
+          <div class="drink-detail">南青山6-15-8｜表参道駅徒歩5分<br>1997年創業の老舗イタリアン！ひめと同い年のお店笑<br>ブッラータチーズ・自家製プリンが名物 🇮🇹｜ランチ候補</div>
+          <a class="map-link" href="https://www.google.com/maps/place/IL+PACIOCCONE+CASEIFICIO/data=!4m2!3m1!1s0x60188b6718ff136b:0xd00e8538c3fd3a09" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-num">☕</div>
+        <div class="drink-info">
+          <div class="drink-name">トリコロール 本店（銀座）</div>
+          <div class="drink-detail">銀座5-9-17｜銀座A5出口徒歩3分<br>昭和にタイムスリップ！回るドアが気になりすぎる老舗喫茶店☕<br>カフェオレ¥1,250・ショコラ¥560 ひと休みに◎</div>
+          <a class="map-link" href="https://www.google.com/maps/search/トリコロール+本店+銀座" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-num">🍽️</div>
+        <div class="drink-info">
+          <div class="drink-name">タイ・イサーン料理ヤムヤム（銀座）</div>
+          <div class="drink-detail">銀座3-12-16｜銀座駅徒歩7分<br>コスパ崩壊の銀座ランチ！エスニック料理食べたい欲が高まってる笑<br>昼11:00〜15:00・夜17:00〜23:00</div>
+          <a class="map-link" href="https://www.google.com/maps/search/タイ+イサーン料理+ヤムヤム+銀座" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-num">🍺</div>
+        <div class="drink-info">
+          <div class="drink-name">ニホンバシ ブルワリー トウキョウステーション（丸の内）</div>
+          <div class="drink-detail">東京駅直結・丸の内1-11-1 パシフィックセンチュリープレイス丸の内 1F<br>常時13種類の樽生クラフトビールが楽しめる！🍺<br>料理もしっかり系で肉・パスタ・つまみ系までバランス◎<br>飲み放題コース5,500円〜というコスパのよさも魅力！</div>
+          <a class="map-link" href="https://www.google.com/maps/search/ニホンバシ+ブルワリー+トウキョウステーション" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="card-emoji">🗓️</span>
+    <div class="card-name">5/3（土）高輪ゲートウェイ・大井町デート</div>
+    <div class="drink-list">
+      <div class="drink-item">
+        <div class="drink-num">🍽️</div>
+        <div class="drink-info">
+          <div class="drink-name">Pedibus Jambus（白金台）</div>
+          <div class="drink-detail">白金台3丁目18-5｜人気のフランス田舎食堂！<br>旬野菜のスープとグリルチーズパンが名物 🧀<br>高輪ゲートウェイから内見の帰りに立ち寄れるかも</div>
+          <a class="map-link" href="https://www.google.com/maps/search/Pedibus+Jambus+白金台" target="_blank">📍 Google マップ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- ═══════════════════════════════ 番外編 ═══════════════════════════════ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-number">+</div>
+    <span class="section-tag">Bonus</span>
+    <h2 class="section-title">番外編：気になる<em>カフェ＆ごはん</em></h2>
+    <p class="section-desc">
+      デートプランとは別に、<br>
+      ふたりで行ってみたいなーって思ってるお店たち。<br>
+      気になったら一緒に行こうね💕
+    </p>
+  </div>
+
+  <div class="card">
+    <span class="card-emoji">☕</span>
+    <div class="card-name">ピノキオ（板橋・大山）</div>
+    <div class="card-detail">老夫婦が営む、創業40年以上の老舗喫茶店🍳<br>銅板で1枚ずつ丁寧に焼き上げるホットケーキが名物！<br>「老夫婦 × 老舗 × 銅板ホットケーキ」が喫茶店好きには刺さりすぎる…<br>板橋の大山ってちょっと遠いけど、行く価値ありそうで気になってる</div>
+    <div class="drink-list">
+      <div class="drink-item">
+        <div class="drink-num">📍</div>
+        <div class="drink-info">
+          <div class="drink-name">店舗情報</div>
+          <div class="drink-detail">東京都板橋区大山｜大山駅近<br>ホットケーキ ¥550（税込）<br>老舗ならではの温かい空間で、ゆっくりしたいな</div>
+        </div>
+      </div>
+    </div>
+    <div class="pills"><span class="pill">老舗喫茶</span><span class="pill sage">ホットケーキ</span><span class="pill">板橋・大山</span></div>
+    <a class="map-link" href="https://www.google.com/maps/search/ピノキオ+板橋+大山+喫茶店" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="card">
+    <span class="card-emoji">🍜</span>
+    <div class="card-name">ジャンジャン麺ハウス（新大久保）</div>
+    <div class="card-detail">新大久保で地元の韓国人がこっそり通う隠れた名店！<br>チャジャンミョン（ジャジャン麺）がめちゃくちゃ食べたくて保存してたお店😋<br>最近できた麻辣クリームちゃんぽんも気になりすぎる…</div>
+    <div class="drink-list">
+      <div class="drink-item">
+        <div class="drink-num">📍</div>
+        <div class="drink-info">
+          <div class="drink-name">店舗情報</div>
+          <div class="drink-detail">東京都新宿区歌舞伎町2-32-17 富士会館 1F<br>新大久保駅から徒歩7分｜月〜日 11:00〜05:00<br>ジャジャン麺 ¥830・麻辣クリームちゃんぽん ¥1,280</div>
+        </div>
+      </div>
+    </div>
+    <div class="pills"><span class="pill">韓国料理</span><span class="pill sage">チャジャンミョン</span><span class="pill">新大久保</span></div>
+    <a class="map-link" href="https://www.google.com/maps/search/ジャンジャン麺ハウス+新大久保" target="_blank">📍 Google マップ</a>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+
+<div class="ending fade-in">
+  <div class="ending-heart">💕</div>
+  <div class="ending-text">Which one shall we do first?</div>
+  <p class="ending-sub">
+    GW、5月、たくさん一緒に過ごそうね 🌿
+  </p>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
