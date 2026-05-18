@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ひめの この夏 TOP4</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky:#B8D8E8;--sea:#6BAED6;--deep:#2C5F7A;--coral:#E8857A;
+    --sand:#F5EDD8;--mint:#A8D5C2;--cream:#FAFAF7;--text:#2A2A2A;--muted:#7A7A6E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--cream);color:var(--text);font-family:'Noto Sans JP',sans-serif;font-weight:300;overflow-x:hidden;}
+
+  .cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;position:relative;background:linear-gradient(170deg,#EAF4F8 0%,#D4EBF0 35%,#C8E6D5 65%,#F5EDD8 100%);overflow:hidden;}
+  .cover::before{content:'';position:absolute;top:-100px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(107,174,214,.2) 0%,transparent 70%);animation:float 6s ease-in-out infinite;}
+  .cover::after{content:'';position:absolute;bottom:-80px;left:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(232,133,122,.15) 0%,transparent 70%);animation:float 8s ease-in-out infinite reverse;}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+  .wave-deco{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;letter-spacing:.4em;color:var(--sea);opacity:0;animation:fadeUp .8s .2s ease forwards;margin-bottom:20px;}
+  .cover-en{font-family:'Playfair Display',serif;font-size:clamp(44px,12vw,72px);font-weight:400;line-height:1.1;color:var(--deep);opacity:0;animation:fadeUp .9s .4s ease forwards;}
+  .cover-en .acc{color:var(--coral);}
+  .cover-ja{font-size:13px;letter-spacing:.25em;color:var(--muted);margin:14px 0 36px;opacity:0;animation:fadeUp .8s .6s ease forwards;}
+  .cover-line{width:40px;height:1px;background:var(--coral);margin:0 auto 36px;opacity:0;animation:fadeUp .8s .8s ease forwards;}
+  .cover-intro{max-width:300px;font-size:13.5px;line-height:2.1;color:#666;opacity:0;animation:fadeUp .8s 1s ease forwards;}
+
+  .nav-strip{display:grid;grid-template-columns:repeat(4,1fr);max-width:480px;margin:0 auto;border-bottom:1px solid rgba(0,0,0,.06);position:sticky;top:0;z-index:100;background:rgba(250,250,247,.95);backdrop-filter:blur(8px);}
+  .nav-item{padding:12px 4px;text-align:center;font-size:11px;letter-spacing:.08em;color:var(--muted);text-decoration:none;border-right:1px solid rgba(0,0,0,.06);transition:color .2s,background .2s;}
+  .nav-item:last-child{border-right:none;}
+  .nav-item:hover{color:var(--coral);background:rgba(232,133,122,.05);}
+  .nav-num{display:block;font-family:'Playfair Display',serif;font-size:18px;color:var(--sea);line-height:1;margin-bottom:2px;}
+
+  .section{max-width:480px;margin:0 auto;padding:56px 24px 40px;}
+  .sec-tag{font-family:'Playfair Display',serif;font-style:italic;font-size:11px;letter-spacing:.35em;color:var(--coral);display:block;margin-bottom:8px;}
+  .sec-num{font-family:'Playfair Display',serif;font-size:72px;font-weight:400;color:rgba(107,174,214,.18);line-height:1;margin-bottom:-22px;}
+  .sec-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:500;color:var(--deep);line-height:1.25;margin-bottom:6px;}
+  .sec-title em{font-style:italic;color:var(--coral);}
+  .sec-desc{font-size:13px;line-height:2.1;color:#777;margin-top:14px;padding-left:16px;border-left:2px solid rgba(107,174,214,.4);}
+
+  .card{background:#fff;border-radius:18px;padding:24px;margin-top:20px;border:1px solid rgba(0,0,0,.06);position:relative;overflow:hidden;}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0;}
+  .card.sea::before{background:linear-gradient(90deg,var(--sea),var(--sky));}
+  .card.coral::before{background:linear-gradient(90deg,var(--coral),#f0a89e);}
+  .card.mint::before{background:linear-gradient(90deg,var(--mint),#c5e8da);}
+  .card.sand::before{background:linear-gradient(90deg,#C9A96E,var(--sand));}
+  .card-emoji{font-size:32px;margin-bottom:10px;display:block;}
+  .card-title{font-size:15px;font-weight:400;color:var(--deep);margin-bottom:10px;line-height:1.5;}
+  .card-body{font-size:13px;line-height:2;color:#666;}
+
+  .highlight{background:linear-gradient(135deg,#EAF4F8,#D4EBF0);border-radius:14px;padding:18px;margin-top:16px;border:1px solid rgba(107,174,214,.25);}
+  .highlight-title{font-size:13px;font-weight:400;color:var(--deep);margin-bottom:8px;}
+  .highlight-body{font-size:12.5px;line-height:2;color:#555;}
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .pill{font-size:10.5px;padding:3px 10px;border-radius:20px;background:rgba(107,174,214,.1);color:var(--sea);border:1px solid rgba(107,174,214,.2);}
+  .pill.coral{background:rgba(232,133,122,.1);color:var(--coral);border-color:rgba(232,133,122,.2);}
+  .pill.mint{background:rgba(168,213,194,.15);color:#4a9a7a;border-color:rgba(168,213,194,.3);}
+
+  .menu-row{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.05);}
+  .menu-row:last-child{border-bottom:none;}
+  .menu-num{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:var(--coral);min-width:20px;padding-top:2px;}
+  .menu-name{font-size:14px;font-weight:400;color:var(--deep);margin-bottom:3px;}
+  .menu-detail{font-size:12px;color:#888;line-height:1.8;}
+
+  .map-btn{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:11px;color:var(--sea);text-decoration:none;border:1px solid rgba(107,174,214,.3);padding:4px 10px;border-radius:20px;background:rgba(107,174,214,.07);transition:background .2s;}
+  .map-btn:hover{background:rgba(107,174,214,.15);}
+
+  .grume-btn{display:inline-flex;align-items:center;gap:5px;margin-top:16px;font-size:12px;color:#fff;text-decoration:none;padding:11px 22px;border-radius:25px;background:linear-gradient(135deg,var(--coral),#d9746a);box-shadow:0 4px 12px rgba(232,133,122,.3);transition:opacity .2s,transform .2s;}
+  .grume-btn:hover{opacity:.9;transform:translateY(-1px);}
+
+  .divider{display:flex;align-items:center;gap:12px;max-width:480px;margin:8px auto;padding:0 24px;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.07);}
+
+  .ending{text-align:center;padding:64px 24px;background:linear-gradient(160deg,var(--cream),#EAF4F8,#D4EBF0);}
+  .ending-wave{font-size:36px;margin-bottom:16px;}
+  .ending-txt{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;color:var(--deep);margin-bottom:12px;line-height:1.4;}
+  .ending-sub{font-size:12.5px;color:#888;line-height:2;}
+
+  .fade-in{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="wave-deco">June 2025 · Summer Wishlist</div>
+  <div class="cover-en">ひめの<br><span class="acc">この夏</span><br>TOP <span class="acc">4</span></div>
+  <div class="cover-ja">HIME'S SUMMER BUCKET LIST</div>
+  <div class="cover-line"></div>
+  <p class="cover-intro">行きたい場所、食べたいもの、<br>やってみたいこと。<br>6月、よしきくんと叶えたい4つ 🌊</p>
+</div>
+
+<nav class="nav-strip">
+  <a href="#s1" class="nav-item"><span class="nav-num">01</span>海</a>
+  <a href="#s2" class="nav-item"><span class="nav-num">02</span>ビュッフェ</a>
+  <a href="#s3" class="nav-item"><span class="nav-num">03</span>新大久保</a>
+  <a href="#s4" class="nav-item"><span class="nav-num">04</span>グルメ</a>
+</nav>
+
+<!-- 1位 -->
+<div id="s1" class="section fade-in">
+  <div class="sec-num">01</div>
+  <span class="sec-tag">No.1 · Summer Beach</span>
+  <h2 class="sec-title">夏の<em>海</em>に行きたい！</h2>
+  <p class="sec-desc">夏のビーチで水着着て海に入って日焼けしたい！<br>夏のビーチも、水着も、海に入るのも全部はじめてなんだ。<br>だからこそ、よしきくんと一緒に行きたい 🌅</p>
+
+  <div class="card sea">
+    <span class="card-emoji">👙</span>
+    <div class="card-title">それまでに体を仕上げたい！</div>
+    <div class="card-body">海に向けてボディメイクも頑張る💪<br>目安はヒップスラスト60kgを安定して10回×3セット！それができると見た目にはっきり変化が出るらしいから、それを目指す🔥<br>ジム・テニス・食事管理、全力でやって最高の状態で海に行きたい！</div>
+    <div class="pills"><span class="pill coral">初めての海水浴</span><span class="pill">水着デビュー</span><span class="pill mint">ボディメイク中</span></div>
+  </div>
+</div>
+
+<div class="divider"><span>🌊</span></div>
+
+<!-- 2位 -->
+<div id="s2" class="section fade-in">
+  <div class="sec-num">02</div>
+  <span class="sec-tag">No.2 · Luxury Buffet</span>
+  <h2 class="sec-title">スイーツ<em>ビュッフェ</em></h2>
+  <p class="sec-desc">ホテルニューオータニの<br>メロン・マンゴービュッフェ、絶対行きたい！<br>夏だけの贅沢なひとときを一緒に 🍈</p>
+
+  <div class="card coral">
+    <span class="card-emoji">🍈</span>
+    <div class="card-title">ホテルニューオータニ<br>メロン・マンゴービュッフェ</div>
+    <div class="card-body">
+      夏の風物詩！ニューオータニ伝統のフルーツビュッフェ。<br>
+      メロン・マンゴーをはじめ季節のフルーツスイーツが食べ放題🌟<br><br>
+      📍 東京都千代田区紀尾井町4-1<br>
+      🚃 赤坂見附・永田町駅すぐ<br>
+      ⚠️ 大人気で予約必須！早めに押さえよう！
+    </div>
+    <div class="pills"><span class="pill coral">要予約</span><span class="pill">夏季限定</span><span class="pill mint">老舗ホテル</span></div>
+    <a class="map-btn" href="https://www.google.com/maps/search/ホテルニューオータニ+東京" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-title">💡 予約のコツ</div>
+    <div class="highlight-body">毎年即満席になる大人気ビュッフェ。<br>公式サイトからの事前予約が必須！<br>日程が決まったらすぐに予約しよう。</div>
+  </div>
+</div>
+
+<div class="divider"><span>🍜</span></div>
+
+<!-- 3位 -->
+<div id="s3" class="section fade-in">
+  <div class="sec-num">03</div>
+  <span class="sec-tag">No.3 · Korea Town Revenge</span>
+  <h2 class="sec-title">新大久保<em>リベンジ</em></h2>
+  <p class="sec-desc">行きたいお店、全部決まってる！<br>ジャジャン麺食べて、ピンスで締める<br>最高の韓国グルメの日🇰🇷</p>
+
+  <div class="card mint">
+    <span class="card-emoji">🍜</span>
+    <div class="card-title">まずはジャジャン麺！</div>
+    <div class="card-body">韓国式中華料理の名店でがっつり食べたい😋</div>
+    <div class="menu-row">
+      <div class="menu-num">✦</div>
+      <div>
+        <div class="menu-name">ジャジャン麺ハウス 歌舞伎町</div>
+        <div class="menu-detail">
+          新宿区歌舞伎町2-32-17 富士会館1F｜新大久保駅徒歩7分<br>
+          月〜日 11:00〜05:00<br>
+          🍜 ジャジャン麺 ¥830 / 🌶️ 麻辣クリームちゃんぽん ¥1,280<br>
+          🥩 タンスユク（揚げ豚の甘酢あんかけ）も！
+        </div>
+        <a class="map-btn" href="https://www.google.com/maps/search/ジャジャン麺ハウス+新大久保+歌舞伎町" target="_blank">📍 Google マップ</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mint">
+    <span class="card-emoji">🍧</span>
+    <div class="card-title">食後はピンス（韓国かき氷）！</div>
+    <div class="card-body">夏っぽいよね！候補2店から選ぼう🌸</div>
+
+    <div class="menu-row">
+      <div class="menu-num">1</div>
+      <div>
+        <div class="menu-name">HOMIBING（ホミビン）</div>
+        <div class="menu-detail">新大久保駅徒歩1分｜23:30まで営業<br>味付き氷のふわふわピンスが絶品！マンゴーホミビンが大人気🥭</div>
+        <a class="map-btn" href="https://www.google.com/maps/search/HOMIBING+新大久保" target="_blank">📍 Google マップ</a>
+      </div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-num">2</div>
+      <div>
+        <div class="menu-name">ソルビン 新大久保</div>
+        <div class="menu-detail">新大久保エリア｜韓国発の人気ピンス専門店🇰🇷<br>ミルクたっぷりのふわふわピンスが人気　インスタ映えも◎</div>
+        <a class="map-btn" href="https://www.google.com/maps/search/ソルビン+新大久保" target="_blank">📍 Google マップ</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-title">🗺️ おすすめコース</div>
+    <div class="highlight-body">ジャジャン麺ハウスでがっつり韓国中華 →<br>少し歩いてお腹を落ち着かせながら新大久保散策 →<br>ピンスでクールダウン🍧 最高の締め！</div>
+  </div>
+</div>
+
+<div class="divider"><span>🍽️</span></div>
+
+<!-- 4位 -->
+<div id="s4" class="section fade-in">
+  <div class="sec-num">04</div>
+  <span class="sec-tag">No.4 · Food Exploration</span>
+  <h2 class="sec-title">グルメ<em>開拓</em>したい！</h2>
+  <p class="sec-desc">肉・カレー・餃子・ピザ・飲み・ラーメン…<br>気になるお店がいっぱいあるの！<br>よしきくんと制覇していこう🍴</p>
+
+  <div class="card sand">
+    <span class="card-emoji">📋</span>
+    <div class="card-title">全店リストはこちら！</div>
+    <div class="card-body">肉・カレー・餃子・ピザ・飲み・ラーメンの<br>気になるお店をジャンル別にまとめたよ。<br>どれから行く？</div>
+    <a class="grume-btn" href="gourmet_list.html" target="_blank">🍽️ グルメ開拓リストを見る →</a>
+  </div>
+
+  <div class="card sand">
+    <span class="card-emoji">✨</span>
+    <div class="card-title">ジャンルラインナップ</div>
+    <div class="card-body">
+      🥩 肉（ステーキ・焼肉・トンテキほか9店）<br>
+      🍛 カレー（タイ・スリランカ・インドほか4店）<br>
+      🥟 餃子・中華（4店）<br>
+      🍕 ピザ（5店）<br>
+      🍺 飲み（3店）<br>
+      🍜 ラーメン（二郎系・家系おすすめ付き）
+    </div>
+    <div class="pills"><span class="pill">全27店舗+</span><span class="pill coral">Googleマップリンク付き</span></div>
+  </div>
+</div>
+
+<div class="divider"><span>🌿</span></div>
+
+<div class="ending fade-in">
+  <div class="ending-wave">🌊</div>
+  <div class="ending-txt">この夏、ぜんぶ<br>一緒に叶えようね</div>
+  <p class="ending-sub">よしきくんと過ごす夏が<br>最高の思い出になりますように ☀️</p>
+</div>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), {threshold:.1});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

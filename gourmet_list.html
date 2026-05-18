@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>グルメ開拓リスト🍴</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{--sea:#6BAED6;--deep:#2C5F7A;--coral:#E8857A;--sand:#F5EDD8;--mint:#A8D5C2;--cream:#FAFAF7;--text:#2A2A2A;--muted:#7A7A6E;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--cream);color:var(--text);font-family:'Noto Sans JP',sans-serif;font-weight:300;overflow-x:hidden;}
+
+  .header{background:linear-gradient(135deg,var(--deep),#1a3f54);color:#fff;padding:48px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+  .header::before{content:'🍽️';position:absolute;font-size:160px;right:-20px;top:-20px;opacity:.06;}
+  .header-tag{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;letter-spacing:.4em;color:rgba(255,255,255,.6);margin-bottom:12px;display:block;}
+  .header-title{font-family:'Playfair Display',serif;font-size:clamp(28px,8vw,40px);font-weight:400;line-height:1.2;margin-bottom:8px;}
+  .header-title em{font-style:italic;color:#A8D5C2;}
+  .header-sub{font-size:13px;color:rgba(255,255,255,.65);line-height:1.8;}
+
+  .genre-nav{display:flex;overflow-x:auto;gap:10px;padding:16px 20px;background:#fff;border-bottom:1px solid rgba(0,0,0,.06);-webkit-overflow-scrolling:touch;}
+  .genre-nav::-webkit-scrollbar{display:none;}
+  .gnav-btn{flex-shrink:0;font-size:11.5px;padding:7px 14px;border-radius:20px;background:rgba(107,174,214,.1);color:var(--sea);border:1px solid rgba(107,174,214,.2);text-decoration:none;transition:background .2s,color .2s;white-space:nowrap;}
+  .gnav-btn:hover{background:var(--sea);color:#fff;}
+
+  .section{max-width:480px;margin:0 auto;padding:36px 20px 28px;}
+  .sec-hd{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .sec-icon{font-size:28px;}
+  .sec-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--deep);}
+  .sec-count{font-size:11px;color:var(--muted);margin-top:2px;}
+
+  .shop-card{background:#fff;border-radius:16px;padding:20px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);border-left:4px solid var(--sea);position:relative;}
+  .shop-card.meat{border-left-color:#E8857A;}
+  .shop-card.curry{border-left-color:#F0C87A;}
+  .shop-card.gyoza{border-left-color:#A8D5C2;}
+  .shop-card.pizza{border-left-color:#D4A8D5;}
+  .shop-card.drink{border-left-color:#7ABBD8;}
+  .shop-card.ramen{border-left-color:#E8C5B5;}
+
+  .shop-name{font-size:15px;font-weight:400;color:var(--deep);margin-bottom:4px;}
+  .shop-area{font-size:11px;color:var(--coral);font-weight:400;margin-bottom:6px;letter-spacing:.05em;}
+  .shop-desc{font-size:12.5px;color:#666;line-height:1.85;}
+  .shop-note{font-size:11.5px;color:#E8857A;margin-top:6px;padding:6px 10px;background:rgba(232,133,122,.08);border-radius:8px;}
+
+  .map-btn{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:11px;color:var(--sea);text-decoration:none;border:1px solid rgba(107,174,214,.3);padding:4px 10px;border-radius:20px;background:rgba(107,174,214,.07);transition:background .2s;}
+  .map-btn:hover{background:rgba(107,174,214,.15);}
+
+  .badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:12px;margin-right:4px;margin-bottom:4px;}
+  .badge.hot{background:rgba(232,133,122,.12);color:#c06060;}
+  .badge.pick{background:rgba(107,174,214,.12);color:var(--sea);}
+  .badge.warn{background:rgba(240,200,122,.15);color:#b08020;}
+
+  .divider{display:flex;align-items:center;gap:12px;max-width:480px;margin:4px auto;padding:0 20px;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.07);}
+
+  .back-btn{display:block;text-align:center;padding:24px;text-decoration:none;font-size:12.5px;color:var(--sea);}
+  .back-btn:hover{color:var(--deep);}
+
+  .fade-in{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-tag">Gourmet Exploration List</span>
+  <h1 class="header-title">グルメ<em>開拓</em>リスト</h1>
+  <p class="header-sub">肉・カレー・餃子・ピザ・飲み・ラーメン<br>よしきくんと全部制覇したい！</p>
+</div>
+
+<div class="genre-nav">
+  <a href="#meat" class="gnav-btn">🥩 肉（9店）</a>
+  <a href="#curry" class="gnav-btn">🍛 カレー（4店）</a>
+  <a href="#gyoza" class="gnav-btn">🥟 餃子・中華（4店）</a>
+  <a href="#pizza" class="gnav-btn">🍕 ピザ（5店）</a>
+  <a href="#drink" class="gnav-btn">🍺 飲み（3店）</a>
+  <a href="#ramen" class="gnav-btn">🍜 ラーメン（2店）</a>
+</div>
+
+<!-- 🥩 肉 -->
+<div id="meat" class="section fade-in">
+  <div class="sec-hd">
+    <span class="sec-icon">🥩</span>
+    <div>
+      <div class="sec-title">肉</div>
+      <div class="sec-count">9店舗</div>
+    </div>
+  </div>
+
+  <div class="shop-card meat">
+    <div class="shop-name">ジュークステーキ 秋葉原中央口店</div>
+    <div class="shop-area">📍 秋葉原</div>
+    <div class="shop-desc">熟成はらみステーキが1,000円以下！コスパ最強のランチ専門店。1ポンドチーズハンバーグも絶品。ライス大盛り無料。</div>
+    <span class="badge warn">⚠️ ランチのみ11:30〜14:30</span>
+    <a class="map-btn" href="https://www.google.com/maps/place/%E3%82%B8%E3%83%A5%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%86%E3%83%BC%E3%82%AD+%E7%A7%8B%E8%91%89%E5%8E%9F%E4%B8%AD%E5%A4%AE%E5%8F%A3%E5%BA%97" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card meat">
+    <div class="shop-name">アナンダ</div>
+    <div class="shop-area">📍 神田</div>
+    <div class="shop-desc">神田の路地裏に佇む名店。ランチ限定50食のハラミステーキが¥1,300で超人気。仕入れへのこだわりが強く、赤身肉好きにはたまらない。</div>
+    <span class="badge warn">⚠️ ランチのみ・売り切れ注意</span>
+    <a class="map-btn" href="https://www.google.com/maps/place/%E3%82%A2%E3%83%8A%E3%83%B3%E3%83%80+%E7%A5%9E%E7%94%B0" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card meat">
+    <div class="shop-name">ミスターデンジャー 浅草観音店</div>
+    <div class="shop-area">📍 浅草</div>
+    <div class="shop-desc">元プロレスラーが経営するステーキ＆ハンバーグ店。牛一頭から2kgしか取れない希少な赤身肉を使用。箸でほどける柔らかさが自慢。</div>
+    <span class="badge pick">◎ 柔らかさが異次元</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/ミスターデンジャー+浅草観音店" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card meat">
+    <div class="shop-name">焼肉・光陽</div>
+    <div class="shop-area">📍 大崎</div>
+    <div class="shop-desc">予約困難の隠れた名店！分厚い上タンやハラミ、ザブトンが絶品。1.2万円で驚愕のコスパと話題。現金のみ・要予約。</div>
+    <span class="badge hot">🔥 予約困難</span><span class="badge warn">⚠️ 現金のみ</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/焼肉+光陽+大崎" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card meat">
+    <div class="shop-name">焼肉レストラン 三宝苑</div>
+    <div class="shop-area">📍 野方（西武新宿線）</div>
+    <div class="shop-desc">1966年創業の老舗！名物「三宝苑ロース」は生姜タレとの組み合わせが最高。東京食肉市場直送の鮮度抜群のお肉をリーズナブルに。</div>
+    <span class="badge pick">◎ 老舗の安定感</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/三宝苑+野方+焼肉" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card meat">
+    <div class="shop-name">焼肉 凛</div>
+    <div class="shop-area">📍 月島</div>
+    <div class="shop-desc">食べログ焼肉百名店に何度も選出！「元祖厚切り牛タン塩焼」が名物。芝浦直送の新鮮な肉を女将さんが焼いてくれる下町の名店。</div>
+    <span class="badge hot">🔥 焼肉百名店</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/焼肉+凛+月島" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card meat">
+    <div class="shop-name">炭火焼 ゆうじ</div>
+    <div class="shop-area">📍 渋谷</div>
+    <div class="shop-desc">「東京でホルモンといえばここ」と言われる伝説的名店。食べログ百名店に複数年連続選出。おまかせコース一択でOK。電話予約のみ。</div>
+    <span class="badge hot">🔥 焼肉百名店</span><span class="badge warn">⚠️ 電話予約・カード不可</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/炭火焼+ゆうじ+渋谷+宇田川町" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card meat">
+    <div class="shop-name">東京トンテキ ヨドバシAkiba</div>
+    <div class="shop-area">📍 秋葉原</div>
+    <div class="shop-desc">低温ラードでじっくり仕上げた柔らかトンテキの専門店。秘伝のオリジナルソースが絶品！ヨドバシカメラ内で気軽に入れる。</div>
+    <span class="badge pick">◎ 豚肉好きに</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/東京トンテキ+ヨドバシAkiba" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card meat">
+    <div class="shop-name">恵比寿焼肉 ホルモン富士</div>
+    <div class="shop-area">📍 恵比寿</div>
+    <div class="shop-desc">名物は味噌ホルモンと白タレ焼き！コスパ良好でホルモン好きには外せない一軒。予算¥2,000〜3,000で楽しめる。</div>
+    <a class="map-btn" href="https://www.google.com/maps/search/恵比寿焼肉+ホルモン富士" target="_blank">📍 Google マップ</a>
+  </div>
+</div>
+
+<div class="divider"><span>🍛</span></div>
+
+<!-- 🍛 カレー -->
+<div id="curry" class="section fade-in">
+  <div class="sec-hd">
+    <span class="sec-icon">🍛</span>
+    <div>
+      <div class="sec-title">カレー</div>
+      <div class="sec-count">4店舗</div>
+    </div>
+  </div>
+
+  <div class="shop-card curry">
+    <div class="shop-name">タイ料理研究所 渋谷店</div>
+    <div class="shop-area">📍 渋谷</div>
+    <div class="shop-desc">タイで修行を積んだシェフによる本格タイ料理。グリーンカレーやガパオなど、辛さも選べて本場の味が楽しめる。渋谷駅徒歩5分の好立地。</div>
+    <a class="map-btn" href="https://www.google.com/maps/search/タイ料理研究所+渋谷" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card curry">
+    <div class="shop-name">バンダラ ランカ</div>
+    <div class="shop-area">📍 四谷（四谷三丁目・信濃町の中間）</div>
+    <div class="shop-desc">アート施設内の異空間スリランカ料理店。ランチはスリランカカレービュッフェ（約2,400円・紅茶＆デザート付き）！テラスに錦鯉の水槽があっておしゃれ。予約推奨。</div>
+    <span class="badge pick">◎ 雰囲気最高・インスタ映え</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/バンダラランカ+四谷三丁目" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card curry">
+    <div class="shop-name">アーンドラ・ダイニング 銀座</div>
+    <div class="shop-area">📍 銀座</div>
+    <div class="shop-desc">銀座一丁目駅徒歩2分。本格南インド料理専門店。ビリヤニが食べたい！ランチ〜¥999〜とコスパ良好。日替わりランチセットが人気。</div>
+    <a class="map-btn" href="https://www.google.com/maps/search/アーンドラダイニング+銀座" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card curry">
+    <div class="shop-name">印度カリー子おすすめのスパイスカレー</div>
+    <div class="shop-area">📍 各地（スパイスカレー店を開拓）</div>
+    <div class="shop-desc">印度カリー子さんがおすすめするスパイスカレー店を巡るのもいいかも！本格スパイスカレーが気軽に楽しめる新感覚グルメ。</div>
+    <span class="badge pick">◎ トレンドのスパイスカレー</span>
+  </div>
+</div>
+
+<div class="divider"><span>🥟</span></div>
+
+<!-- 🥟 餃子・中華 -->
+<div id="gyoza" class="section fade-in">
+  <div class="sec-hd">
+    <span class="sec-icon">🥟</span>
+    <div>
+      <div class="sec-title">餃子・中華</div>
+      <div class="sec-count">4店舗</div>
+    </div>
+  </div>
+
+  <div class="shop-card gyoza">
+    <div class="shop-name">你好（ニーハオ）</div>
+    <div class="shop-area">📍 幡ヶ谷（渋谷系）</div>
+    <div class="shop-desc">3種類の手作り餃子が名物！特に水餃子が大優勝とのこと。全部手作りで皮からこだわる餃子専門店。定休：月・日曜。</div>
+    <a class="map-btn" href="https://www.google.com/maps/search/您好+幡ヶ谷+餃子" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card gyoza">
+    <div class="shop-name">ファイト餃子</div>
+    <div class="shop-area">📍 巣鴨</div>
+    <div class="shop-desc">まるまる丸いホワイト餃子の名店！皮は分厚くパリッとしていてもちもち。中の餡はジューシーで一度食べたらクセになる味。ビールとの相性抜群。</div>
+    <span class="badge pick">◎ 唯一無二の食感</span><span class="badge warn">⚠️ 平日のみ・売切れ早め</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/ファイト餃子+巣鴨" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card gyoza">
+    <div class="shop-name">白碗竹快樓 赤坂店</div>
+    <div class="shop-area">📍 赤坂</div>
+    <div class="shop-desc">赤坂の路地裏の一軒家レストランで味わう本格北京料理。「素材を生かした背筋の伸びた凛とした料理」がモットー。大人のデートにも◎。</div>
+    <span class="badge pick">◎ 隠れ家感・デート向き</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/白碗竹快樓+赤坂" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card gyoza">
+    <div class="shop-name">龍朋（りゅうほう）</div>
+    <div class="shop-area">📍 神楽坂</div>
+    <div class="shop-desc">「これまで食べたどのチャーハンとも違う」と絶賛される伝説のチャーハンが名物！昔ながらの町中華の活気ある雰囲気で人気。平日昼は行列必至。</div>
+    <span class="badge hot">🔥 チャーハン伝説</span><span class="badge warn">⚠️ 行列あり</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/龍朋+神楽坂+中華" target="_blank">📍 Google マップ</a>
+  </div>
+</div>
+
+<div class="divider"><span>🍕</span></div>
+
+<!-- 🍕 ピザ -->
+<div id="pizza" class="section fade-in">
+  <div class="sec-hd">
+    <span class="sec-icon">🍕</span>
+    <div>
+      <div class="sec-title">ピザ</div>
+      <div class="sec-count">5店舗</div>
+    </div>
+  </div>
+
+  <div class="shop-card pizza">
+    <div class="shop-name">PIZZERIA CAPOLI</div>
+    <div class="shop-area">📍 新宿</div>
+    <div class="shop-desc">「真のナポリピッツァ協会」認定店！新宿駅東南口徒歩1分の超好立地。食べログピザ百名店に複数回選出。ほぼ全てのピザをハーフ＆ハーフで注文できる。</div>
+    <span class="badge hot">🔥 ピザ百名店</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/PIZZERIA+CAPOLI+新宿" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card pizza">
+    <div class="shop-name">Che Voglia! ケヴォーリア！</div>
+    <div class="shop-area">📍 三越前 コレド室町1</div>
+    <div class="shop-desc">三越前駅徒歩1分！ミラノ風ピッツァ（ミラネーゼ）が楽しめる。オマール海老と魚介のパスタも絶品。ランチ昼¥2,000〜3,000。</div>
+    <a class="map-btn" href="https://www.google.com/maps/search/Che+Voglia+三越前+コレド室町" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card pizza">
+    <div class="shop-name">PIZZERIA SPONTINI 新宿店</div>
+    <div class="shop-area">📍 新宿（西口）</div>
+    <div class="shop-desc">ミラノで60年以上の歴史を誇る老舗が日本初上陸！厚さ約3cmのフワフワ生地にモッツァレラたっぷり。直径50cmのBIGサイズも！予約不可・カジュアル。</div>
+    <span class="badge pick">◎ インパクト大のビジュアル</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/PIZZERIA+SPONTINI+新宿" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card pizza">
+    <div class="shop-name">PICICA PICICA PIZZA&PASTA</div>
+    <div class="shop-area">📍 恵比寿</div>
+    <div class="shop-desc">恵比寿駅近くの「knock」の姉妹店。自家製青唐辛子で味変できる個性的なピザが人気。ワインも種類豊富でディナーにぴったり。予約必須。</div>
+    <span class="badge warn">⚠️ 予約必須</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/PICICA+PICICA+PIZZA+恵比寿" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card pizza">
+    <div class="shop-name">アンティーカ ピッツェリア ダ ミケーレ 恵比寿</div>
+    <div class="shop-area">📍 恵比寿</div>
+    <div class="shop-desc">1870年創業・ナポリ発の世界的名店の日本第1号店！食べログピザ百名店2025選出。粉・トマト・チーズ・窯すべてイタリアから輸送した本物の味。マルゲリータとマリナーラの2種のみという潔さ。</div>
+    <span class="badge hot">🔥 ピザ百名店2025</span><span class="badge warn">⚠️ 土日祝は行列・要予約</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/ダ+ミケーレ+恵比寿+ピッツェリア" target="_blank">📍 Google マップ</a>
+  </div>
+</div>
+
+<div class="divider"><span>🍺</span></div>
+
+<!-- 🍺 飲み -->
+<div id="drink" class="section fade-in">
+  <div class="sec-hd">
+    <span class="sec-icon">🍺</span>
+    <div>
+      <div class="sec-title">飲み🍻</div>
+      <div class="sec-count">3店舗</div>
+    </div>
+  </div>
+
+  <div class="shop-card drink">
+    <div class="shop-name">えびすの安兵衛</div>
+    <div class="shop-area">📍 恵比寿</div>
+    <div class="shop-desc">大衆居酒屋×2種類の餃子！「昇天するくらい美味しい」と評判の餃子が名物。恵比寿駅徒歩5分。予算3,500円〜。16:00〜24:00。</div>
+    <a class="map-btn" href="https://www.google.com/maps/search/えびすの安兵衛+恵比寿" target="_blank">📍 Google マップ</a>
+  </div>
+
+  <div class="shop-card drink">
+    <div class="shop-name">オボンジップ OBONGZIP</div>
+    <div class="shop-area">📍 神田・新大久保（複数店舗）</div>
+    <div class="shop-desc">韓国で300店舗展開の大人気チェーンが日本初上陸！テナガダコの直火炒め・ポッサム・マッククスの「オボンスペシャル」が名物。本場韓国のおふくろの味。</div>
+    <span class="badge pick">◎ 韓国料理好きに</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/オボンジップ+神田" target="_blank">📍 Google マップ（神田店）</a>
+  </div>
+
+  <div class="shop-card drink">
+    <div class="shop-name">ニホンバシ ブルワリー トウキョウステーション</div>
+    <div class="shop-area">📍 丸の内（東京駅直結）</div>
+    <div class="shop-desc">東京駅直結で常時13種類の樽生クラフトビールが楽しめる！料理もしっかり系で肉・パスタ・つまみ系まで揃う。飲み放題コース5,500円〜でコスパ◎。</div>
+    <span class="badge pick">◎ クラフトビール好きに</span>
+    <a class="map-btn" href="https://www.google.com/maps/search/ニホンバシ+ブルワリー+トウキョウステーション" target="_blank">📍 Google マップ</a>
+  </div>
+</div>
+
+<div class="divider"><span>🍜</span></div>
+
+<!-- 🍜 ラーメン -->
+<div id="ramen" class="section fade-in">
+  <div class="sec-hd">
+    <span class="sec-icon">🍜</span>
+    <div>
+      <div class="sec-title">ラーメン開拓！</div>
+      <div class="sec-count">二郎系・家系を攻める</div>
+    </div>
+  </div>
+
+  <div class="shop-card ramen">
+    <span style="font-size:28px;display:block;margin-bottom:10px;">🍜</span>
+    <div class="shop-name">二郎系・家系、一緒に開拓しよう！</div>
+    <div class="shop-desc">どのお店から攻める？よしきくんと相談しながら決めたい🙌</div>
+  </div>
+</div>
+
+<a href="summer_top4.html" class="back-btn">← メインページに戻る</a>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), {threshold:.1});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
