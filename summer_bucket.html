@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer Bucket List 🏖️</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500&family=Caveat:wght@400;600;700&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --lemon:#F5E87A; --lemon-s:#FEFBD0; --lemon-d:#C8BC40;
+  --sky:#8ED8E8;   --sky-s:#D6F2F8;   --sky-d:#4AAABF;
+  --petal:#F5A8C0; --petal-s:#FCDEED; --petal-d:#C0607A;
+  --cream:#FFFDF5; --deep:#2A4558; --muted:#8A9AA8;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--deep);font-family:'Noto Sans JP',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* ── PROGRESS BAR ── */
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--lemon),var(--sky),var(--petal));width:0%;z-index:1000;transition:width 0.1s;}
+
+/* ── SIDE NAV ── */
+#side-nav{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:999;display:flex;flex-direction:column;gap:14px;align-items:center;}
+.snav-dot{width:10px;height:10px;border-radius:50%;border:2px solid rgba(42,69,88,.25);background:transparent;cursor:pointer;transition:all .35s;position:relative;}
+.snav-dot.active{background:var(--deep);border-color:var(--deep);transform:scale(1.3);}
+.snav-dot::after{content:attr(data-label);position:absolute;right:20px;top:50%;transform:translateY(-50%);font-family:'Caveat',cursive;font-size:13px;color:var(--deep);white-space:nowrap;opacity:0;transition:opacity .25s;pointer-events:none;background:rgba(255,253,245,.9);padding:2px 8px;border-radius:20px;}
+.snav-dot:hover::after{opacity:1;}
+@media(max-width:480px){#side-nav{right:10px;}.snav-dot{width:8px;height:8px;}}
+
+/* ── COVER ── */
+#cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 28px;position:relative;background:linear-gradient(150deg,var(--lemon-s) 0%,var(--sky-s) 50%,var(--petal-s) 100%);overflow:hidden;}
+
+/* bubbles */
+.bub{position:absolute;border-radius:50%;pointer-events:none;}
+.bub1{width:140px;height:140px;background:rgba(142,216,232,.28);top:6%;left:-40px;animation:drift 8s ease-in-out infinite;}
+.bub2{width:90px;height:90px;background:rgba(245,168,192,.35);top:12%;right:8%;animation:drift 6s ease-in-out infinite 1s;}
+.bub3{width:200px;height:200px;background:rgba(245,232,122,.2);bottom:15%;left:-60px;animation:drift 10s ease-in-out infinite 0.5s;}
+.bub4{width:65px;height:65px;background:rgba(142,216,232,.4);bottom:28%;right:-10px;animation:drift 7s ease-in-out infinite 2s;}
+.bub5{width:45px;height:45px;background:rgba(245,168,192,.45);top:50%;left:12%;animation:drift 9s ease-in-out infinite 1.5s;}
+.bub6{width:110px;height:110px;background:rgba(245,232,122,.3);top:3%;right:25%;animation:drift 11s ease-in-out infinite 0.3s;}
+@keyframes drift{0%,100%{transform:translateY(0) rotate(0deg);}33%{transform:translateY(-18px) rotate(3deg);}66%{transform:translateY(10px) rotate(-2deg);}}
+
+.cover-tag{font-family:'Caveat',cursive;font-size:15px;color:var(--muted);letter-spacing:.15em;margin-bottom:24px;opacity:0;animation:fadeUp .6s .3s ease forwards;}
+
+/* letter-by-letter reveal */
+.cover-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(52px,15vw,88px);font-weight:300;line-height:1;color:var(--deep);letter-spacing:-.02em;margin-bottom:6px;}
+.cover-title .letter{display:inline-block;opacity:0;transform:translateY(30px);animation:letterIn .5s ease forwards;}
+.cover-title .sp{display:inline-block;width:.3em;}
+.cover-title .outline{-webkit-text-stroke:1.5px var(--deep);color:transparent;}
+
+.cover-icons{font-size:26px;letter-spacing:.2em;margin:22px 0 8px;opacity:0;animation:fadeUp .6s 1.8s ease forwards;}
+.cover-bar{width:44px;height:2px;background:linear-gradient(90deg,var(--sky-d),var(--petal-d));border-radius:2px;margin:16px auto 20px;opacity:0;animation:fadeUp .6s 2s ease forwards;}
+.cover-sub{font-family:'Caveat',cursive;font-size:19px;color:var(--muted);line-height:1.9;opacity:0;animation:fadeUp .6s 2.1s ease forwards;}
+
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:fadeUp .6s 2.5s ease forwards;}
+.scroll-hint span{font-family:'Caveat',cursive;font-size:12px;color:var(--muted);letter-spacing:.2em;}
+.scroll-arrow{width:1px;height:36px;background:linear-gradient(to bottom,var(--muted),transparent);animation:scrollPulse 1.8s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.8);}50%{opacity:1;transform:scaleY(1);}}
+
+/* ── SECTIONS ── */
+.sec{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 28px 60px;max-width:520px;margin:0 auto;position:relative;}
+
+/* slide-in animation classes */
+.slide-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s ease;}
+.slide-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s ease;}
+.slide-up{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.slide-left.in,.slide-right.in,.slide-up.in{opacity:1;transform:translate(0,0);}
+
+/* section full-bg strips */
+.bg-strip{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;transition:background .6s ease;pointer-events:none;}
+
+/* section eyebrow + title style */
+.sec-meta{margin-bottom:28px;}
+.sec-eyebrow{font-family:'Caveat',cursive;font-size:14px;color:var(--muted);letter-spacing:.15em;display:block;margin-bottom:8px;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-size:90px;font-weight:300;line-height:.85;color:rgba(42,69,88,.07);letter-spacing:-.04em;margin-bottom:-28px;display:block;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(38px,10vw,58px);font-weight:400;color:var(--deep);line-height:1.1;}
+.sec-title-en{font-family:'Caveat',cursive;font-size:13px;color:var(--muted);letter-spacing:.2em;margin-top:6px;display:block;}
+
+/* content blocks */
+.c-block{background:rgba(255,255,255,.75);backdrop-filter:blur(10px);border-radius:20px;padding:24px;margin-top:20px;border:1px solid rgba(255,255,255,.9);box-shadow:0 4px 24px rgba(0,0,0,.06);}
+.c-block-sky{border-top:3px solid var(--sky);}
+.c-block-petal{border-top:3px solid var(--petal);}
+.c-block-lemon{border-top:3px solid var(--lemon);}
+
+.c-emo{font-size:32px;margin-bottom:10px;display:block;}
+.c-ttl{font-family:'Caveat',cursive;font-size:20px;font-weight:700;color:var(--deep);margin-bottom:10px;}
+.c-body{font-size:13px;line-height:2.1;color:#5A6A78;}
+
+/* goal big number */
+.goal-big{text-align:center;padding:24px 20px;background:linear-gradient(135deg,rgba(142,216,232,.15),rgba(245,168,192,.15));border-radius:18px;margin-top:18px;}
+.goal-kg{font-family:'Cormorant Garamond',serif;font-size:72px;font-style:italic;color:var(--deep);line-height:1;}
+.goal-sub{font-family:'Caveat',cursive;font-size:16px;color:var(--muted);margin-top:4px;}
+.goal-desc{font-size:12.5px;color:#7A8A98;line-height:1.9;margin-top:10px;}
+
+/* pills */
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+.pill{font-size:11px;padding:4px 13px;border-radius:20px;}
+.p-sky{background:rgba(142,216,232,.18);color:var(--sky-d);border:1px solid rgba(142,216,232,.35);}
+.p-petal{background:rgba(245,168,192,.18);color:var(--petal-d);border:1px solid rgba(245,168,192,.35);}
+.p-lemon{background:rgba(245,232,122,.25);color:#8A7A20;border:1px solid rgba(245,232,122,.45);}
+
+/* highlight box */
+.hl{border-radius:16px;padding:18px 20px;margin-top:16px;}
+.hl-sky{background:rgba(142,216,232,.15);}
+.hl-petal{background:rgba(245,168,192,.15);}
+.hl-lemon{background:rgba(245,232,122,.2);}
+.hl-title{font-family:'Caveat',cursive;font-size:16px;font-weight:700;color:var(--deep);margin-bottom:8px;}
+.hl-body{font-size:13px;line-height:2;color:#5A6A78;}
+
+/* map link */
+.map-link{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:11px;color:var(--sky-d);text-decoration:none;border:1px solid rgba(142,216,232,.4);padding:4px 12px;border-radius:20px;background:rgba(142,216,232,.08);transition:background .2s;}
+.map-link:hover{background:rgba(142,216,232,.2);}
+
+/* ── ENDING ── */
+#ending{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:64px 28px;background:linear-gradient(145deg,var(--lemon-s),var(--sky-s),var(--petal-s));position:relative;overflow:hidden;}
+#ending .bub-e1{width:120px;height:120px;background:rgba(245,168,192,.3);top:-30px;right:-20px;}
+#ending .bub-e2{width:80px;height:80px;background:rgba(142,216,232,.35);bottom:20px;left:-15px;}
+.end-icon{font-size:44px;margin-bottom:18px;display:block;}
+.end-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:32px;color:var(--deep);line-height:1.4;margin-bottom:16px;}
+.end-sub{font-family:'Caveat',cursive;font-size:19px;color:var(--muted);line-height:2;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes letterIn{to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div class="bg-strip" id="bg-strip"></div>
+
+<!-- SIDE NAV -->
+<nav id="side-nav">
+  <div class="snav-dot" data-target="cover" data-label="Top"></div>
+  <div class="snav-dot" data-target="sea" data-label="海"></div>
+  <div class="snav-dot" data-target="matsuri" data-label="夏祭り"></div>
+  <div class="snav-dot" data-target="kawagoe" data-label="川越"></div>
+  <div class="snav-dot" data-target="memory" data-label="思い出"></div>
+  <div class="snav-dot" data-target="photo" data-label="写真"></div>
+</nav>
+
+<!-- ═══ COVER ═══ -->
+<section id="cover">
+  <div class="bub bub1"></div><div class="bub bub2"></div><div class="bub bub3"></div>
+  <div class="bub bub4"></div><div class="bub bub5"></div><div class="bub bub6"></div>
+
+  <div class="cover-tag">July — August 2025</div>
+  <h1 class="cover-title" id="cover-title" aria-label="Summer Bucket List"></h1>
+  <div class="cover-icons">🏖️ 👙 🍧</div>
+  <div class="cover-bar"></div>
+  <!-- <div class="cover-sub">よしきくんと叶えたい<br>この夏のこと、ぜんぶ。</div> -->
+  <div class="scroll-hint"><span>SCROLL</span><div class="scroll-arrow"></div></div>
+</section>
+
+<!-- ═══ SEA ═══ -->
+<section id="sea" data-bg="linear-gradient(150deg,#EAF7FB 0%,#D0EEF5 100%)">
+  <div class="sec slide-left">
+    <div class="sec-meta">
+      <span class="sec-eyebrow">01 · Ocean</span>
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">夏の海</h2>
+      <span class="sec-title-en">SUMMER BEACH</span>
+    </div>
+
+    <div class="c-block c-block-sky slide-right">
+      <span class="c-emo">👙</span>
+      <div class="c-ttl">はじめての海水浴！</div>
+      <div class="c-body">
+        夏のビーチで水着着て海に入って日焼けしたい🌊<br>
+        夏のビーチも、水着も、海に入るのも全部はじめて。<br>
+        だからこそ、よしきくんと一緒に行きたい！
+      </div>
+      <div class="pills">
+        <span class="pill p-sky">水着デビュー</span>
+        <span class="pill p-petal">はじめての海</span>
+        <span class="pill p-lemon">日焼けしたい</span>
+      </div>
+    </div>
+
+    <div class="goal-big slide-up">
+      <div class="goal-kg">60<span style="font-size:36px">kg</span></div>
+      <div class="goal-sub">Hip Thrust × 10回 × 3セット</div>
+      <div class="goal-desc">これが安定してできるようになると<br>見た目にはっきり変化が出るらしい！<br>海までに絶対仕上げる💪🔥<br>あと10kg！</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MATSURI ═══ -->
+<section id="matsuri" data-bg="linear-gradient(150deg,#FDE8EF 0%,#F8D0DF 100%)">
+  <div class="sec slide-right">
+    <div class="sec-meta">
+      <span class="sec-eyebrow">02 · Summer Festival</span>
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">夏祭り</h2>
+      <span class="sec-title-en">YUKATA &amp; FIREWORKS</span>
+    </div>
+
+    <div class="c-block c-block-petal slide-left">
+      <span class="c-emo">👘</span>
+      <div class="c-ttl">浴衣着たい！</div>
+      <div class="c-body">
+        浴衣着てお祭り行きたいな🎋<br>
+        屋台でいろいろ食べて、<br>
+        できれば花火も一緒に見たい🎆
+      </div>
+      <div class="pills">
+        <!-- <span class="pill p-petal">浴衣デビュー</span> -->
+        <span class="pill p-sky">屋台グルメ</span>
+        <span class="pill p-lemon">花火見たい/したい</span>
+      </div>
+    </div>
+
+    <div class="hl hl-petal slide-up">
+      <div class="hl-title">🎆 やりたいこと</div>
+      <div class="hl-body">
+        🍡 りんご飴・焼きとうもろこし・焼きそば<br>
+        <!-- 🧊 かき氷（いちご or メロンで迷う笑）<br> -->
+        🎯 射的や金魚すくいも！<br>
+        🎆 花火は夏の風物詩だよね
+      </div>
+    </div>
+
+    <div class="hl hl-petal slide-up" style="margin-top:12px;">
+      <div class="hl-title">🗓️ 東京近郊 夏祭り</div>
+      <div class="hl-body">
+        深川八幡祭り（8月12〜16日）— 通称水掛け祭り！<br>
+        麻布十番納涼まつり（8月22〜23日）— 約300店もの露店が並ぶ！<br>
+        地元の夏祭り — ゆっくり楽しめる穴場も◎
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KAWAGOE ═══ -->
+<section id="kawagoe" data-bg="linear-gradient(150deg,#FEFBD0 0%,#FAF5A0 100%)">
+  <div class="sec slide-left">
+    <div class="sec-meta">
+      <span class="sec-eyebrow">03 · Little Edo</span>
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">川越</h2>
+      <span class="sec-title-en">KAWAGOE DATE</span>
+    </div>
+
+    <div class="c-block c-block-lemon slide-right">
+      <span class="c-emo">🎋</span>
+      <div class="c-ttl">小江戸で食べ歩きデート！</div>
+      <div class="c-body">
+        蔵造りの街並みを浴衣で散歩しながら<br>
+        食べ歩きしたいな🍡<br>
+        かき氷も川越で食べたら絶対おいしい！🧊
+      </div>
+      <div class="pills">
+        <span class="pill p-lemon">浴衣で行く</span>
+        <span class="pill p-sky">食べ歩き</span>
+        <span class="pill p-petal">かき氷</span>
+      </div>
+    </div>
+
+    <div class="c-block c-block-lemon slide-left" style="margin-top:14px;">
+      <span class="c-emo">🎬</span>
+      <div class="c-ttl">しおりちゃんデートをトレース！</div>
+      <div class="c-body">
+        ふたりで推してるしおりちゃんが、川越で飲んでたよね！<br>
+        あのルート、そのままなぞって川越呑みデートしたい🍺✨
+      </div>
+    </div>
+
+    <div class="hl hl-lemon slide-up">
+      <div class="hl-title">🍡 川越食べ歩きリスト</div>
+      <div class="hl-body">
+        🥔 いもや — 川越名物さつまいもスイーツ<br>
+        🍧 かき氷専門店めぐり<br>
+        🍺 蔵造りの街並みで川越呑み<br>
+        🛍️ 菓子屋横丁でお土産も！
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Plan ═══ -->
+<section id="memory" data-bg="linear-gradient(150deg,#D6F2F8 0%,#B8E8F2 100%)">
+  <div class="sec slide-right">
+    <div class="sec-meta">
+      <span class="sec-eyebrow">04 · Our First Travel</span>
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">旅行計画</h2>
+      <span class="sec-title-en">TRAVEL PLANNING</span>
+    </div>
+
+    <div class="c-block c-block-sky slide-left">
+      <span class="c-emo">🧳</span>
+      <div class="c-ttl">旅行計画立てよ！</div>
+      <div class="c-body">
+        なかめで行きたいお店開拓しながら<br>
+        旅行計画を立てれば運動も頑張れそう✨
+      </div>
+      <div class="pills">
+        <span class="pill p-sky">東南アジア初上陸</span>
+        <span class="pill p-petal">2人の初旅行</span>
+      </div>
+    </div>
+
+    <div class="hl hl-sky slide-up">
+      <div class="hl-title">✈️ やりたいこと</div>
+      <div class="hl-body">
+        タイご飯！<br>
+        ナイトマーケット - ここで水着やタイパンツ入手できたら👙<br>
+        きれいなビーチ - 泳いだり、タイビールにつまみでたそがれるのも🍺<br>
+        タイのエニタイムに行ってみる🏋️<br>
+        ガイドブックやYouTube見てやりたいこと一緒に考えよ〜！✨️
+      </div>
+    </div>
+
+    <!-- <div class="c-block c-block-sky slide-right" style="margin-top:14px;">
+      <span class="c-emo">💡</span>
+      <div class="c-ttl">一緒に作りたい</div>
+      <div class="c-body">
+        お互いのお気に入り写真を選んで、<br>
+        思い出の曲をBGMにして、<br>
+        ふたりで一緒に作れたら最高かな🎵
+      </div>
+    </div> -->
+  </div>
+</section>
+
+<!-- ═══ PHOTO ═══
+<section id="photo" data-bg="linear-gradient(150deg,#FCDEED 0%,#F8C0D8 100%)">
+  <div class="sec slide-left">
+    <div class="sec-meta">
+      <span class="sec-eyebrow">05 · Photo Championship</span>
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">写真選手権</h2>
+      <span class="sec-title-en">OUR FAVE PHOTOS</span>
+    </div>
+
+    <div class="c-block c-block-petal slide-right">
+      <span class="c-emo">🏆</span>
+      <div class="c-ttl">お気に入り写真TOP5を発表し合う！</div>
+      <div class="c-body">
+        私はよしきくんの写真から<br>
+        よしきくんは私の写った写真から<br>
+        お気に入りTOP5をそれぞれ選んで<br>
+        発表し合うだけ笑🥰
+      </div>
+      <div class="pills">
+        <span class="pill p-petal">私 → よしきくんの写真</span>
+        <span class="pill p-sky">よしきくん → 私の写真</span>
+      </div>
+    </div>
+
+    <div class="hl hl-petal slide-up">
+      <div class="hl-title">✨ どんな写真が選ばれるかな？</div>
+      <div class="hl-body">
+        お互いがどの瞬間を好きだったかがわかる<br>
+        シンプルだけど絶対盛り上がる企画😄<br><br>
+        ランキング発表しながらそのときの話もして、<br>
+        ふたりの記憶をたどる夜にしたいな🌙
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- ═══ ENDING ═══ -->
+<section id="ending">
+  <div class="bub bub-e1" style="width:120px;height:120px;background:rgba(245,168,192,.3);position:absolute;top:-30px;right:-20px;border-radius:50%;"></div>
+  <div class="bub bub-e2" style="width:80px;height:80px;background:rgba(142,216,232,.35);position:absolute;bottom:20px;left:-15px;border-radius:50%;"></div>
+  <span class="end-icon slide-up">☀️</span>
+  <div class="end-title slide-up">この夏、ぜんぶ<br>一緒にやろうね</div>
+  <div class="end-sub slide-up">よしきくんと過ごす夏が<br>最高の思い出になりますように<br>🌊 🎆 🍧</div>
+</section>
+
+<script>
+// ── Letter-by-letter title reveal ──
+const titleEl = document.getElementById('cover-title');
+const words = ['Summer', ' ', 'Bucket', ' ', 'List'];
+const outlineWords = ['Bucket'];
+let delay = 0.7;
+words.forEach(word => {
+  if (word === ' ') {
+    const sp = document.createElement('span');
+    sp.className = 'sp';
+    titleEl.appendChild(sp);
+    return;
+  }
+  const isOutline = outlineWords.includes(word);
+  const wordWrap = document.createElement('span');
+  wordWrap.style.display = 'block';
+  [...word].forEach(ch => {
+    const s = document.createElement('span');
+    s.className = 'letter' + (isOutline ? ' outline' : '');
+    s.textContent = ch;
+    s.style.animationDelay = delay + 's';
+    delay += 0.06;
+    wordWrap.appendChild(s);
+  });
+  titleEl.appendChild(wordWrap);
+  delay += 0.1;
+});
+
+// ── Progress bar ──
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  prog.style.width = pct + '%';
+});
+
+// ── Background color transitions ──
+const bgStrip = document.getElementById('bg-strip');
+const sections = document.querySelectorAll('section[data-bg]');
+const coverBg = 'linear-gradient(150deg,#FEFBD0 0%,#D4F0F7 50%,#FCDEED 100%)';
+
+const bgObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.intersectionRatio > 0.4) {
+      bgStrip.style.background = e.target.dataset.bg || coverBg;
+    }
+  });
+}, { threshold: 0.4 });
+
+sections.forEach(s => bgObserver.observe(s));
+
+// Reset bg on cover
+const coverObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.intersectionRatio > 0.3) {
+      bgStrip.style.background = coverBg;
+    }
+  });
+}, { threshold: 0.3 });
+coverObs.observe(document.getElementById('cover'));
+
+// ── Slide-in on scroll ──
+const slideEls = document.querySelectorAll('.slide-left,.slide-right,.slide-up');
+const slideObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      // stagger children if multiple
+      e.target.style.transitionDelay = e.target.dataset.delay || '0s';
+      e.target.classList.add('in');
+    }
+  });
+}, { threshold: 0.15 });
+slideEls.forEach((el, i) => {
+  // stagger sibling elements
+  el.dataset.delay = (i % 3) * 0.12 + 's';
+  slideObs.observe(el);
+});
+
+// ── Side nav ──
+const navDots = document.querySelectorAll('.snav-dot');
+const allSections = ['cover','sea','matsuri','kawagoe','memory','photo'];
+
+navDots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    document.getElementById(dot.dataset.target)?.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.intersectionRatio > 0.3) {
+      navDots.forEach(d => d.classList.remove('active'));
+      const active = document.querySelector(`.snav-dot[data-target="${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+
+allSections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) navObs.observe(el);
+});
+</script>
+</body>
+</html>
